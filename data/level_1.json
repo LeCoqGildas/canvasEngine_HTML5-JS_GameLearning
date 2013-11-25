@@ -1,0 +1,32 @@
+[
+	{
+		"img": "bottom",
+		"id": "bottom",
+		"polygon": [],
+		"layer":2,
+		"data":[
+			{
+				"x":4,
+				"y":5,
+				"scale":2,
+				"opacity": 0,9,
+				"rotation": 0
+			}
+		]
+	},
+	{
+		"img": "background",
+		"id": "background",
+		"polygon": [],
+		"layer":0,
+		"data":[
+			{
+				"x":4,
+				"y":5,
+				"scale":2,
+				"opacity": 1,
+				"rotation": 0
+			}
+		]
+	}
+]
