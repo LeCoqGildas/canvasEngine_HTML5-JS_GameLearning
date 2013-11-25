@@ -3,6 +3,9 @@ canvasEngine_HTML5-JS_GameLearning
 
 This is a little project to learn how to make an html5 and javascript game.<br>
 --------
+![alt tag](http://nsa33.casimages.com/img/2013/11/25/131125042746997062.png)
+
+
 First, i use the CanvasEngine Framework http://canvasengine.net/
 
 The current game is an platform game (as mario)
