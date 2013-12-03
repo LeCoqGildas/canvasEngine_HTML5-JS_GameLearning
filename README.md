@@ -16,6 +16,6 @@ what is made:
 -The world load, you can insert an world (json), to creat this i use TiledMapEditor http://www.mapeditor.org/download.html<br>
 -The game player with move, gravity, jump...<br>
 -Collision between the game player and platforms<br>
--Scrolling (but it's not work, with collision, the collision spaces not move with the scrolling effect, try for hunerstand the problem! :) )<br>
+-Scrolling 
 <br>
 Good games!
