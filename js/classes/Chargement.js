@@ -158,7 +158,7 @@ canvas.Scene.new({
 			self.scrolling.setMainElement(self.player);
 			
 			var map = self.scrolling.addScroll({
-				element: this.getMap(), //element décor
+				element: this.el, //element décor
 				speed: 3,//vitesse de defilement
 				block: true, //ne défile plus si les extremite touche le bord du canvas
 				width: this.getWidthPixel(),
