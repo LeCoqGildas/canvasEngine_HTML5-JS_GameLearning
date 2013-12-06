@@ -132,27 +132,64 @@ canvas.Scene.new({
 				fond:"img/sd/tilesets/fond.png"
 		}
 	},
+	sprites: {},
+	//coins: {}, //avec une touche, rajouter ce qui est en bas
+	addCoin: function(id, layer, data){
+		var coins = this.game_map.addEntity(id,data);
+		var sprite = this.sprites[id] = Class.new("Sprite_Coins", [id, this, layer, data]);
+		coins.callHit(function(){
+			sprite.hit(true);//appel l'annimation touché ref=Sprite_Coins
+		}, function(){
+			sprite.hit(false);//appel l'annimation non touché
+		});
+		//avec une touche, enlever tout ce qui est au dessus
+		//this.coins[id] = this.game_map.addEntity(id,data);
+		//this.sprites[id] = Class.new("Sprite_Coins", [id, this, layer, data]);
+	},
+	pressCoins: function(){
+		var self = this;
+		canvas.Input.press(Input.Enter, function(){
+			for(var id in self.coins){
+				if(self.coins[id].isHit()){
+					self.sprites[id].hit(true);
+				}
+			}
+		});
+	},
 	ready: function(stage) {	
 		var self = this;
 		var tiled = canvas.Tiled.new();
+
 		var fond = self.createElement();
 			fond.drawImage("fond");
 			stage.append(fond);
 			
-		tiled.load(self, stage, "data/level5.json");
+		tiled.load(this, stage, "data/level5.json");
 
 		tiled.ready(function() {
-			
-			self.game_map = Class.new("Game_Map", [this]);
 			var tile_w = this.getTileWidth();
 			var tile_h = this.getTileHeight();
-			
-			self.player = self.createElement();
+			var layer_event;
+
+			self.game_map = Class.new("Game_Map", [this]);
 			self.game_player = Class.new("Game_Player", ["monPlayer",32,32,1 * tile_w, 8*tile_h, self.game_map]);
+
+			self.player = self.createElement();
 			self.player.drawImage("player");
 			self.player.x = self.game_player.x;
 			self.player.y = self.game_player.y;
-			stage.append(self.player);
+
+
+			layer_event = this.getLayerObject();
+			self.addCoin(1, layer_event, {
+				x: 14 * tile_w,
+				y: 10 * tile_h,
+				width: 32,
+				height: 32
+			});
+
+			stage.append(self.player);//affiche le joueur
+			
 
 			self.scrolling = canvas.Scrolling.new(self, tile_w, tile_h);
 			self.scrolling.setMainElement(self.player);
@@ -168,14 +205,21 @@ canvas.Scene.new({
 
 			var fondscreen = self.scrolling.addScroll({
 				element: fond, //element décor
-				speed: 2,//vitesse de defilement
+				speed: 1,//vitesse de defilement
 				block: true, //ne défile plus si les extremite touche le bord du canvas
-				width: 1200,
+				width: this.getWidthPixel(),
 				parallax: false,
-				height: 480
+				height: this.getHeightPixel()
 			});
 			self.scrolling.setScreen(fondscreen);
 		
+
+
+
+
+
+
+
 			var anim_right = canvas.Animation.new({
 				images:"playerD",
 				animations:{
@@ -243,6 +287,9 @@ canvas.Scene.new({
 				//animation...
 			});
 
+			//piece avec une touche
+			//self.pressCoins();
+
 		});
 	
 	},
@@ -274,3 +321,4 @@ canvas.Scene.new({
 	
 	
 });
+
