@@ -16,6 +16,7 @@ what is made:
 -The world load, you can insert an world (json), to creat this i use TiledMapEditor http://www.mapeditor.org/download.html<br>
 -The game player with move, gravity, jump...<br>
 -Collision between the game player and platforms<br>
--Scrolling 
+-Scrolling <br>
+-coins entity
 <br>
 Good games!
