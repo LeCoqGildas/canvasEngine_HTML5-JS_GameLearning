@@ -8,15 +8,15 @@ Class.create("Sprite_Coins",{
 		this.setPosition(data.x, data.y);
 
 		var animation = canvas.Animation.new({
-			images: "coin2",
+			images: "coin3",
 			animations: {
 				standard:{
 					frames: [0,7],
 					size:{
-						width : 32,
-						height: 32
+						width : 128,
+						height: 128
 					},
-					frequence : 3
+					frequence : 1
 				}
 			}
 		});

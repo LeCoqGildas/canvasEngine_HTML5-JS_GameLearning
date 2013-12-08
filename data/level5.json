@@ -10,6 +10,17 @@
          "width":35,
          "x":0,
          "y":0
+        }, 
+        {
+         "height":15,
+         "name":"piece",
+         "objects":[],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "width":35,
+         "x":0,
+         "y":0
         }],
  "orientation":"orthogonal",
  "properties":

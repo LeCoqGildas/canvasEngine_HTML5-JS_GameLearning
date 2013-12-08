@@ -1,7 +1,7 @@
 Class.create("Game_Player", {
 	map: null,
 	currentState: "",
-	speed: 3,
+	speed: 15,
 	x: 0,
 	y: 0,
 	a: 0,//acceleration
@@ -11,11 +11,11 @@ Class.create("Game_Player", {
 	dece_dir: false,
 	dir: "right",
 	_gravity:{
-		power: 10,
+		power: 50,
 		velocity: 0
 	},
 	_jump:{
-		power: 15,
+		power: 40,
 		velocity: 1
 	},
 	initialize: function(id, width, height, x, y, map){
@@ -61,7 +61,7 @@ Class.create("Game_Player", {
 		var dir = this.dece_dir;
 
 		if (dir){
-			this.d -= .05;
+			this.d -= .1;
 			if(this.d <= 0){
 				this.d = 0;
 				this.dece_dir = false;

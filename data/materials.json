@@ -1,7 +1,7 @@
 [
 	{
 		"id": "_background",
-		"path": "img/sd/title/castle.png"
+		"path": "img/sd/title/castle.jpg"
 	},
 	{
 		"id": "button_Off",
@@ -18,5 +18,9 @@
 	{
 		"id": "coin2",
 		"path": "img/sd/piece/coin2.png"
+	},
+	{
+		"id": "coin3",
+		"path": "img/sd/piece/coin3.png"
 	}
 ]

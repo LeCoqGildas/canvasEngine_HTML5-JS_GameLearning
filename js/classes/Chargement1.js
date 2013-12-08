@@ -42,14 +42,14 @@ canvas.Scene.new({
 				bar_full = self.createElement(),
 				bar_empty = self.createElement();
 
-			bar_empty.drawImage("bar_empty" , 350, 364);
+			bar_empty.drawImage("bar_empty" , 215, 250);
 
 			stage.append(bar_empty);
 			stage.append(bar_full);
 			//à chaque fois qu'un fichier est chargé on dessine davantage la barre full
 			canvas.Materials.load("images", files , function(){
 				percentage += Math.round(100 / files.length);
-				bar_full.drawImage("bar_full", 350, 364, percentage + "%");
+				bar_full.drawImage("bar_full", 215, 250, percentage + "%");
 				stage.refresh();
 			}, function(){
 				//console.log("fini");
@@ -100,8 +100,8 @@ canvas.Scene.new({
 				btn = self.createElement(200,73);
 
 				btn.drawImage("button_Off", 0, pos, width, data_btn.height, 0, 0, width, data_btn.height);
-				btn.x = 400;
-				btn.y = pos + 250;
+				btn.x = 325;
+				btn.y = pos + 180;
 				
 				btn.on("click", data_btn.click);
 				btn.on("mouseover",function() {
@@ -109,7 +109,7 @@ canvas.Scene.new({
 				});
 				btn.on("mouseout",function() {
 					this.drawImage("button_Off", 0, pos, width, data_btn.height, 0, 0, width, data_btn.height);
-				});
+				});			
 				stage.append(btn);
 		}
 		
@@ -125,13 +125,11 @@ canvas.Scene.new({
 	name: "map",
 	materials: {
 		images: {
-				//player:"img/sd/player/playerfix.png",
-				playerFg:"img/sd/player/playerfixg.png",
-				playerFd:"img/sd/player/playerfixd.png",
-				playerL:"img/sd/player/playergauche.png",
-				playerD:"img/sd/player/playerdroite.png",
-				meca:"img/sd/tilesets/plateform/meca.png",
-				coin3:"img/sd/piece/coin3.png"
+				player:"img/sd/player/spritesheet-marioFix.png",
+				playerL:"img/sd/player/mariogauche.png",
+				playerD:"img/sd/player/mariodroite.png",
+				tile:"img/sd/tilesets/tile.png",
+				fond:"img/sd/tilesets/fond.png"
 		}
 	},
 	sprites: {},
@@ -162,11 +160,11 @@ canvas.Scene.new({
 		var self = this;
 		var tiled = canvas.Tiled.new();
 
-		/*var fond = self.createElement();
+		var fond = self.createElement();
 			fond.drawImage("fond");
-			stage.append(fond);*/
+			stage.append(fond);
 			
-		tiled.load(this, stage, "data/meca.json");
+		tiled.load(this, stage, "data/level5.json");
 
 		tiled.ready(function() {
 			var tile_w = this.getTileWidth();
@@ -174,20 +172,20 @@ canvas.Scene.new({
 			var layer_event;
 
 			self.game_map = Class.new("Game_Map", [this]);
-			self.game_player = Class.new("Game_Player", ["monPlayer",128,256,6 * tile_w, 15*tile_h, self.game_map]);
+			self.game_player = Class.new("Game_Player", ["monPlayer",32,32,1 * tile_w, 8*tile_h, self.game_map]);
 
 			self.player = self.createElement();
-			self.player.drawImage("playerFd");
+			self.player.drawImage("player");
 			self.player.x = self.game_player.x;
 			self.player.y = self.game_player.y;
 
 
 			layer_event = this.getLayerObject();
 			self.addCoin(1, layer_event, {
-				x: 9 * tile_w,
-				y: 15 * tile_h,
-				width: 128,
-				height: 128
+				x: 14 * tile_w,
+				y: 10 * tile_h,
+				width: 32,
+				height: 32
 			});
 
 			stage.append(self.player);//affiche le joueur
@@ -198,14 +196,14 @@ canvas.Scene.new({
 			
 			var map = self.scrolling.addScroll({
 				element: this.el, //element décor
-				speed: 50,//vitesse de defilement
+				speed: 3,//vitesse de defilement
 				block: true, //ne défile plus si les extremite touche le bord du canvas
 				width: this.getWidthPixel(),
 				height: this.getHeightPixel()
 			});
 			self.scrolling.setScreen(map);
 
-			/*var fondscreen = self.scrolling.addScroll({
+			var fondscreen = self.scrolling.addScroll({
 				element: fond, //element décor
 				speed: 1,//vitesse de defilement
 				block: true, //ne défile plus si les extremite touche le bord du canvas
@@ -213,7 +211,7 @@ canvas.Scene.new({
 				parallax: false,
 				height: this.getHeightPixel()
 			});
-			self.scrolling.setScreen(fondscreen);*/
+			self.scrolling.setScreen(fondscreen);
 		
 
 
@@ -226,12 +224,12 @@ canvas.Scene.new({
 				images:"playerD",
 				animations:{
 					right:{
-						frames: [0,6],
+						frames: [0,3],
 						size:{
-							width:128,
-							height:256,
+							width:32,
+							height:32,
 						},
-						frequence: 5
+						frequence: 6
 					}
 				}
 			});
@@ -239,12 +237,12 @@ canvas.Scene.new({
 				images:"playerL",
 				animations:{
 					left:{
-						frames: [0,6],
+						frames: [0,3],
 						size:{
-							width: 128,
-							height: 256,
+							width: 32,
+							height: 32,
 						},
-						frequence: 5
+						frequence: 6
 					}
 				}
 			});
@@ -266,7 +264,7 @@ canvas.Scene.new({
 				anim_right.stop();
 				self.game_player.moveClear();
 				self.game_player.setDeceleration("right");
-				self.player.drawImage("playerFd");
+				self.player.drawImage("player");
 				
 			});
 
@@ -274,7 +272,7 @@ canvas.Scene.new({
 				anim_left.stop();
 				self.game_player.moveClear();
 				self.game_player.setDeceleration("left");
-				self.player.drawImage("playerFg");
+				self.player.drawImage("player");
 			});
 				
 			canvas.Input.press(Input.Space, function(){	
@@ -319,7 +317,6 @@ canvas.Scene.new({
 		this.player.y = this.game_player.gravityUpdate();
 		
 		stage.refresh();
-
 	}
 	
 	

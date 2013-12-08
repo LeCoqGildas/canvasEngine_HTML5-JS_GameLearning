@@ -2,6 +2,7 @@ body{
 	background-color:#AAAAAA;
 	background-image:url("../img/sd/mario.jpg");
 	background-witdh: 100%;
+	background-size: 100%;
 	background-repeat:no-repeat;
 	background-attachment: fixed;
 
